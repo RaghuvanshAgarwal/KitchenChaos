@@ -6,6 +6,7 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
     public class Player : MonoBehaviour {
         [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private GameInput gameInput;
+        [SerializeField] private LayerMask counterLayerMask;
 
         private bool _isWalking = false;
         private Vector3 _lastInteractionDirection;
@@ -30,14 +31,10 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
             }
             
             const float interactionDistance = 2f;
-            if (Physics.Raycast(transform.position, _lastInteractionDirection, out RaycastHit hit, interactionDistance)) {
-                Debug.Log("Hit " + hit.transform.name);
+            if (Physics.Raycast(transform.position, _lastInteractionDirection, out RaycastHit hit, interactionDistance, counterLayerMask)) {
                 if (hit.transform.TryGetComponent(out ClearCounter clearCounter)) {
                     clearCounter.Interact();
                 }
-            }
-            else {
-                Debug.Log("No hit ");
             }
         }
 
