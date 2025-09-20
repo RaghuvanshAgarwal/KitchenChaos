@@ -3,13 +3,34 @@ using _RaghuvanshAgarwal.Modules.Counters.Clear;
 using UnityEngine;
 
 namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
+
+    public class OnSelectedCounterChangedEventArgs : EventArgs {
+        public ClearCounter SelectedCounter;
+
+        public OnSelectedCounterChangedEventArgs(ClearCounter selectedCounter) {
+            SelectedCounter = selectedCounter;
+        }
+    }
+    
     public class Player : MonoBehaviour {
         [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private GameInput gameInput;
         [SerializeField] private LayerMask counterLayerMask;
 
+        public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+        public static Player Instance { get; private set; }
+
         private bool _isWalking = false;
         private Vector3 _lastInteractionDirection;
+        private ClearCounter _selectedCounter;
+
+        private void Awake() {
+            if (Instance != null) {
+                Debug.LogError("There can only be one instance of Player!");
+                Destroy(gameObject);
+            }
+            Instance = this;
+        }
 
         private void Start() {
             gameInput.OnInteractAction += GameInputOnInteractAction;
@@ -30,18 +51,8 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
         
         
         private void GameInputOnInteractAction(object sender, EventArgs e) {
-            Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-            Vector3 movDir = new Vector3(inputVector.x, 0, inputVector.y);
-
-            if (movDir != Vector3.zero) {
-                _lastInteractionDirection = movDir;
-            }
-            
-            const float interactionDistance = 2f;
-            if (Physics.Raycast(transform.position, _lastInteractionDirection, out RaycastHit hit, interactionDistance, counterLayerMask)) {
-                if (hit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-                    clearCounter.Interact();
-                }
+            if (_selectedCounter != null) {
+                _selectedCounter.Interact();
             }
         }
 
@@ -57,8 +68,18 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
             const float interactionDistance = 2f;
             if (Physics.Raycast(transform.position, _lastInteractionDirection, out RaycastHit hit, interactionDistance, counterLayerMask)) {
                 if (hit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-                    //clearCounter.Interact();
+                    if (clearCounter != _selectedCounter) {
+                        SetSelectedCounter(clearCounter);
+                    }
                 }
+                else {
+                    _selectedCounter = null;
+                    SetSelectedCounter(null);
+                }
+            }
+            else {
+                _selectedCounter = null;
+                SetSelectedCounter(null);
             }
         }
 
@@ -92,6 +113,11 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
             if (!canMove) return;
             transform.position += movDir * (moveSpeed * Time.deltaTime);
             _isWalking = movDir != Vector3.zero;
+        }
+        
+        private void SetSelectedCounter(ClearCounter selectedCounter) {
+            _selectedCounter = selectedCounter;
+            OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs(_selectedCounter));
         }
     }
 }
