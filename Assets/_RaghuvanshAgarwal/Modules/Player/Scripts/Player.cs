@@ -11,14 +11,38 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
         private bool _isWalking = false;
         private Vector3 _lastInteractionDirection;
 
+        private void Start() {
+            gameInput.OnInteractAction += GameInputOnInteractAction;
+        }
+        
         private void Update() {
             HandleMovement();
             HandleInteractions();
+        }
+        private void OnDestroy() {
+            gameInput.OnInteractAction -= GameInputOnInteractAction;
         }
 
 
         public bool IsWalking() {
             return _isWalking;
+        }
+        
+        
+        private void GameInputOnInteractAction(object sender, EventArgs e) {
+            Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+            Vector3 movDir = new Vector3(inputVector.x, 0, inputVector.y);
+
+            if (movDir != Vector3.zero) {
+                _lastInteractionDirection = movDir;
+            }
+            
+            const float interactionDistance = 2f;
+            if (Physics.Raycast(transform.position, _lastInteractionDirection, out RaycastHit hit, interactionDistance, counterLayerMask)) {
+                if (hit.transform.TryGetComponent(out ClearCounter clearCounter)) {
+                    clearCounter.Interact();
+                }
+            }
         }
 
 
@@ -33,7 +57,7 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
             const float interactionDistance = 2f;
             if (Physics.Raycast(transform.position, _lastInteractionDirection, out RaycastHit hit, interactionDistance, counterLayerMask)) {
                 if (hit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-                    clearCounter.Interact();
+                    //clearCounter.Interact();
                 }
             }
         }
