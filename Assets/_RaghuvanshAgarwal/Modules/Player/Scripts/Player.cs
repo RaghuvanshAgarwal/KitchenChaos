@@ -1,5 +1,6 @@
 using System;
 using _RaghuvanshAgarwal.Modules.Counters.Clear;
+using _RaghuvanshAgarwal.Modules.Kitchen_Objects.Scripts;
 using UnityEngine;
 
 namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
@@ -12,10 +13,11 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
         }
     }
     
-    public class Player : MonoBehaviour {
+    public class Player : MonoBehaviour, IKitchenObjectParent {
         [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private GameInput gameInput;
         [SerializeField] private LayerMask counterLayerMask;
+        [SerializeField] private Transform kitchenObjectFollowTransform;
 
         public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
         public static Player Instance { get; private set; }
@@ -23,6 +25,7 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
         private bool _isWalking = false;
         private Vector3 _lastInteractionDirection;
         private ClearCounter _selectedCounter;
+        private KitchenObject _kitchenObject;
 
         private void Awake() {
             if (Instance != null) {
@@ -52,7 +55,7 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
         
         private void GameInputOnInteractAction(object sender, EventArgs e) {
             if (_selectedCounter != null) {
-                _selectedCounter.Interact();
+                _selectedCounter.Interact(this);
             }
         }
 
@@ -119,5 +122,11 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
             _selectedCounter = selectedCounter;
             OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs(_selectedCounter));
         }
+
+        public Transform GetKitchenObjectFollowTransform() => kitchenObjectFollowTransform;
+        public void SetKitchenObject(KitchenObject kitchenObject) => _kitchenObject = kitchenObject;
+        public KitchenObject GetKitchenObject() => _kitchenObject;
+        public void ClearKitchenObject() => _kitchenObject = null;
+        public bool HasKitchenObject() => _kitchenObject != null;
     }
 }

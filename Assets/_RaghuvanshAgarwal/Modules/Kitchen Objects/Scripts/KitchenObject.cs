@@ -5,28 +5,28 @@ namespace _RaghuvanshAgarwal.Modules.Kitchen_Objects.Scripts {
     public class KitchenObject : MonoBehaviour {
         [field: SerializeField] public KitchenObjectSO ObjectData { get; private set; }
         
-        private ClearCounter _counter;
+        private IKitchenObjectParent _parent;
 
-        public void SetCounter(ClearCounter newCounter) {
+        public void SetParent(IKitchenObjectParent newParent) {
             // Telling the previous counter to clear the object
-            if (_counter != null) {
-                _counter.ClearKitchenObject();
+            if (_parent != null) {
+                _parent.ClearKitchenObject();
             }
             
             // Setting the new counter
-            _counter = newCounter;
-            if (newCounter.HasKitchenObject()) {
-                Debug.LogError("Counter already has a KitchenObject");
+            _parent = newParent;
+            if (newParent.HasKitchenObject()) {
+                Debug.LogError("Kitchen Object Parent already has a KitchenObject");
             }
-            newCounter.SetKitchenObject(this);
+            newParent.SetKitchenObject(this);
             
             //Visually changing the position
-            transform.parent = newCounter.GetKitchenObjectCounterTop();
+            transform.parent = newParent.GetKitchenObjectFollowTransform();
             transform.localPosition = Vector3.zero;
         }
 
-        public ClearCounter GetCounter() {
-            return _counter;
+        public IKitchenObjectParent GetParent() {
+            return _parent;
         }
     }
 }
