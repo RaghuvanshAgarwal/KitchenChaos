@@ -710,6 +710,17 @@ MonoBehaviour:
   AmplitudeGain: 0.5
   FrequencyGain: 0.5
   m_NoiseOffsets: {x: 183.38785, y: -944.96826, z: -290.98666}
+--- !u!114 &1629165254 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2569004243617161760, guid: 7f36e2eca85d7497fa36a784df890be8, type: 3}
+  m_PrefabInstance: {fileID: 20645942}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e48b43a1fd0643e297905f461200e06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClearCounter
 --- !u!1 &1675841878
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,6 +792,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2569004243617161760, guid: 7f36e2eca85d7497fa36a784df890be8, type: 3}
+      propertyPath: testing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2569004243617161760, guid: 7f36e2eca85d7497fa36a784df890be8, type: 3}
+      propertyPath: secondaryCounter
+      value: 
+      objectReference: {fileID: 1629165254}
     - target: {fileID: 3889467642995531634, guid: 7f36e2eca85d7497fa36a784df890be8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -52,7 +52,6 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
         
         private void GameInputOnInteractAction(object sender, EventArgs e) {
             if (_selectedCounter != null) {
-                Debug.Log("Interacted");
                 _selectedCounter.Interact();
             }
         }
