@@ -1,14 +1,15 @@
 using System;
 using _RaghuvanshAgarwal.Modules.Counters.Clear;
+using _RaghuvanshAgarwal.Modules.Counters.Scripts;
 using _RaghuvanshAgarwal.Modules.Kitchen_Objects.Scripts;
 using UnityEngine;
 
 namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
 
     public class OnSelectedCounterChangedEventArgs : EventArgs {
-        public ClearCounter SelectedCounter;
+        public readonly BaseCounter SelectedCounter;
 
-        public OnSelectedCounterChangedEventArgs(ClearCounter selectedCounter) {
+        public OnSelectedCounterChangedEventArgs(BaseCounter selectedCounter) {
             SelectedCounter = selectedCounter;
         }
     }
@@ -24,7 +25,7 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
 
         private bool _isWalking = false;
         private Vector3 _lastInteractionDirection;
-        private ClearCounter _selectedCounter;
+        private BaseCounter _selectedCounter;
         private KitchenObject _kitchenObject;
 
         private void Awake() {
@@ -70,9 +71,9 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
             
             const float interactionDistance = 2f;
             if (Physics.Raycast(transform.position, _lastInteractionDirection, out RaycastHit hit, interactionDistance, counterLayerMask)) {
-                if (hit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-                    if (clearCounter != _selectedCounter) {
-                        SetSelectedCounter(clearCounter);
+                if (hit.transform.TryGetComponent(out BaseCounter counter)) {
+                    if (counter != _selectedCounter) {
+                        SetSelectedCounter(counter);
                     }
                 }
                 else {
@@ -118,7 +119,7 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
             _isWalking = movDir != Vector3.zero;
         }
         
-        private void SetSelectedCounter(ClearCounter selectedCounter) {
+        private void SetSelectedCounter(BaseCounter selectedCounter) {
             _selectedCounter = selectedCounter;
             OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs(_selectedCounter));
         }
