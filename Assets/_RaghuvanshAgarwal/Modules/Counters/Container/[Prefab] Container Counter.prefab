@@ -95,8 +95,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContainerCounter
   counterTopPoint: {fileID: 1892572241880410082}
   objectData: {fileID: 11400000, guid: a4daf9be5755c4d80b5e08a26077f606, type: 2}
-  icon: {fileID: 8966135650865858164}
-  visual: {fileID: 4682365392596218907}
 --- !u!1001 &4558116867247013631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -184,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_RaghuvanshAgarwal.Modules.Counters.Container.ContainerCounterVisual
   counter: {fileID: 8723597281510517616}
+  icon: {fileID: 8966135650865858164}
 --- !u!212 &8966135650865858164 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4841286013473667211, guid: 9a9137fa2b035d34e881701d2c178192, type: 3}

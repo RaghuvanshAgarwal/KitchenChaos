@@ -7,7 +7,11 @@ namespace _RaghuvanshAgarwal.Modules.Counters.Container {
         [SerializeField] private ContainerCounter counter;
         private Animator _animator;
         
+        [SerializeField] private SpriteRenderer icon;
+        
+        
         private void Awake() {
+            icon.sprite = counter.KitchenObject.Icon;
             _animator = GetComponent<Animator>();
         }
 

@@ -7,14 +7,8 @@ namespace _RaghuvanshAgarwal.Modules.Counters.Container {
     public class ContainerCounter : BaseCounter {
         public event EventHandler OnPlayerGrabbedObject;
         [SerializeField] private KitchenObjectSO objectData;
-        [SerializeField] private SpriteRenderer icon;
+        public KitchenObjectSO KitchenObject => objectData;
         
-        
-        private void Awake() {
-            icon.sprite = objectData.Icon;
-        }
-        
-
         public override void Interact(Player.Scripts.Player player) {
             if(player.HasKitchenObject()) return;
             Transform kitchenObject =  Instantiate(objectData.Prefab);

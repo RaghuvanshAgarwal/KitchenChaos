@@ -8,7 +8,9 @@ namespace _RaghuvanshAgarwal.Modules.Counters.Clear {
         
         public override void Interact(Player.Scripts.Player player) {
             if (HasKitchenObject()) {
-                GetKitchenObject().SetParent(player);
+                if (!player.HasKitchenObject()) {
+                    GetKitchenObject().SetParent(player);
+                }
             }
             else {
                 if (player.HasKitchenObject()) {
