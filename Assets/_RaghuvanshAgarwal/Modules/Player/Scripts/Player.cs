@@ -38,14 +38,18 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
 
         private void Start() {
             gameInput.OnInteractAction += GameInputOnInteractAction;
+            gameInput.OnInteractAlternateAction += GameInputOnInteractAlternateAction;
         }
+
         
+
         private void Update() {
             HandleMovement();
             HandleInteractions();
         }
         private void OnDestroy() {
             gameInput.OnInteractAction -= GameInputOnInteractAction;
+            gameInput.OnInteractAlternateAction -= GameInputOnInteractAlternateAction;
         }
 
 
@@ -57,6 +61,12 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
         private void GameInputOnInteractAction(object sender, EventArgs e) {
             if (_selectedCounter != null) {
                 _selectedCounter.Interact(this);
+            }
+        }
+        
+        private void GameInputOnInteractAlternateAction(object sender, EventArgs e) {
+            if (_selectedCounter != null) {
+                _selectedCounter.InteractAlternate(this);
             }
         }
 
@@ -96,13 +106,13 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
             bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, movDir, maxDistance);
             if (!canMove) {
                 Vector3 xAttempt = new Vector3(movDir.x, 0, 0).normalized;
-                canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, xAttempt, maxDistance);
+                canMove = movDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, xAttempt, maxDistance);
                 if (canMove) {
                     movDir = xAttempt;
                 }
                 else {
                     Vector3 zAttempt = new Vector3(0, 0, movDir.z).normalized;
-                    canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, zAttempt, maxDistance);
+                    canMove = movDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, zAttempt, maxDistance);
                     if (canMove) {
                         movDir = zAttempt;
                     }

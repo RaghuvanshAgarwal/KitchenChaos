@@ -11,10 +11,7 @@ namespace _RaghuvanshAgarwal.Modules.Counters.Container {
         
         public override void Interact(Player.Scripts.Player player) {
             if(player.HasKitchenObject()) return;
-            Transform kitchenObject =  Instantiate(objectData.Prefab);
-            if (kitchenObject.TryGetComponent(out KitchenObject kitchen)) {
-                kitchen.SetParent(player);
-            }
+            Kitchen_Objects.Scripts.KitchenObject.Spawn(player, objectData);
             OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
         }
     }

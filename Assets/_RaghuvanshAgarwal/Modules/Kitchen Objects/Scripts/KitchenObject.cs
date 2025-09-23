@@ -6,7 +6,7 @@ namespace _RaghuvanshAgarwal.Modules.Kitchen_Objects.Scripts {
         [field: SerializeField] public KitchenObjectSO ObjectData { get; private set; }
         
         private IKitchenObjectParent _parent;
-
+        
         public void SetParent(IKitchenObjectParent newParent) {
             // Telling the previous counter to clear the object
             if (_parent != null) {
@@ -27,6 +27,22 @@ namespace _RaghuvanshAgarwal.Modules.Kitchen_Objects.Scripts {
 
         public IKitchenObjectParent GetParent() {
             return _parent;
+        }
+
+        public void DestroySelf() {
+            _parent.ClearKitchenObject();
+            Destroy(gameObject);
+        }
+        
+        
+        public static KitchenObject Spawn(IKitchenObjectParent parent, KitchenObjectSO objectData) {
+            Transform kitchenObject =  Instantiate(objectData.Prefab);
+            if (kitchenObject.TryGetComponent(out KitchenObject kitchen)) {
+                kitchen.SetParent(parent);
+                return kitchen;
+            }
+            Debug.LogError(kitchenObject.name + " is not a KitchenObject");
+            return null;
         }
     }
 }

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507e6b6dd6fa249e58bd68bb8c1d3ef6, type: 3}
+  m_Name: Cabbage Slices
+  m_EditorClassIdentifier: Assembly-CSharp::_RaghuvanshAgarwal.Modules.Kitchen_Objects.Scripts.KitchenObjectSO
+  <Name>k__BackingField: Cabbage Slices
+  <Icon>k__BackingField: {fileID: 21300000, guid: bee24f07c57157e45a946eed3bfe8b84, type: 3}
+  <Prefab>k__BackingField: {fileID: 7726503997173213426, guid: e04dadeec341d4c5c911a2e95b18e98d, type: 3}

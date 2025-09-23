@@ -111,6 +111,15 @@ namespace _RaghuvanshAgarwal.Modules.Player.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact Alternate"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d2df7ae-aca5-4460-8fe3-ab159ddef07d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -278,6 +287,28 @@ namespace _RaghuvanshAgarwal.Modules.Player.Input
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2fddbadf-572f-497f-a1ac-2068fe68b3d0"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact Alternate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56bb09ab-0d26-42b0-bdfd-026478c78c3a"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact Alternate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -288,6 +319,7 @@ namespace _RaghuvanshAgarwal.Modules.Player.Input
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+            m_Player_InteractAlternate = m_Player.FindAction("Interact Alternate", throwIfNotFound: true);
         }
 
         ~@PlayerInputActions()
@@ -370,6 +402,7 @@ namespace _RaghuvanshAgarwal.Modules.Player.Input
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Interact;
+        private readonly InputAction m_Player_InteractAlternate;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -389,6 +422,10 @@ namespace _RaghuvanshAgarwal.Modules.Player.Input
             /// Provides access to the underlying input action "Player/Interact".
             /// </summary>
             public InputAction @Interact => m_Wrapper.m_Player_Interact;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/InteractAlternate".
+            /// </summary>
+            public InputAction @InteractAlternate => m_Wrapper.m_Player_InteractAlternate;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -421,6 +458,9 @@ namespace _RaghuvanshAgarwal.Modules.Player.Input
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @InteractAlternate.started += instance.OnInteractAlternate;
+                @InteractAlternate.performed += instance.OnInteractAlternate;
+                @InteractAlternate.canceled += instance.OnInteractAlternate;
             }
 
             /// <summary>
@@ -438,6 +478,9 @@ namespace _RaghuvanshAgarwal.Modules.Player.Input
                 @Interact.started -= instance.OnInteract;
                 @Interact.performed -= instance.OnInteract;
                 @Interact.canceled -= instance.OnInteract;
+                @InteractAlternate.started -= instance.OnInteractAlternate;
+                @InteractAlternate.performed -= instance.OnInteractAlternate;
+                @InteractAlternate.canceled -= instance.OnInteractAlternate;
             }
 
             /// <summary>
@@ -492,6 +535,13 @@ namespace _RaghuvanshAgarwal.Modules.Player.Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnInteract(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Interact Alternate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnInteractAlternate(InputAction.CallbackContext context);
         }
     }
 }
