@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128cd33f511474ce2906b69056d41652, type: 3}
+  m_Name: Cabbage-Cabbage Slices
+  m_EditorClassIdentifier: Assembly-CSharp::_RaghuvanshAgarwal.Modules.Recipes.Cutting.CuttingRecipeSO
+  <Input>k__BackingField: {fileID: 11400000, guid: 29e302b3e0e0a4a568a2f2aa7b182ab3, type: 2}
+  <Output>k__BackingField: {fileID: 11400000, guid: 7b62dc9a2ee654c14859e44914cd4654, type: 2}
+  <CuttingProgressMax>k__BackingField: 5

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
