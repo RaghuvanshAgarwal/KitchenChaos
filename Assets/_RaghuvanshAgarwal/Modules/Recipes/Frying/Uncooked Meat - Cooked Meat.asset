@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd9f4fc0ea7c4e819e078d57ab8a062, type: 3}
+  m_Name: Uncooked Meat - Cooked Meat
+  m_EditorClassIdentifier: Assembly-CSharp::_RaghuvanshAgarwal.Modules.Recipes.Frying.FryingRecipeSO
+  <Input>k__BackingField: {fileID: 11400000, guid: 8e47cca81a06049d9ad47f8271980033, type: 2}
+  <Output>k__BackingField: {fileID: 11400000, guid: 3f8ea004d942f47e6ac6b37982e6fdbb, type: 2}
+  <FryingTimerMax>k__BackingField: 3
