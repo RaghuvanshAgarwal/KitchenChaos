@@ -1,3 +1,4 @@
+using _RaghuvanshAgarwal.Modules.Kitchen_Objects.Plate.Scripts;
 using UnityEngine;
 
 namespace _RaghuvanshAgarwal.Modules.Kitchen_Objects.Scripts {
@@ -31,6 +32,15 @@ namespace _RaghuvanshAgarwal.Modules.Kitchen_Objects.Scripts {
         public void DestroySelf() {
             _parent.ClearKitchenObject();
             Destroy(gameObject);
+        }
+
+        public bool TryGetPlate(out PlateKitchenObject plate) {
+            if (this is PlateKitchenObject plateKitchenObject) {
+                plate = plateKitchenObject;
+                return true;
+            }
+            plate = null;
+            return false;
         }
         
         

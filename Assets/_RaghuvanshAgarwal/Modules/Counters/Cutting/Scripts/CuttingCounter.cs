@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using _RaghuvanshAgarwal.Modules.Counters.Scripts;
+using _RaghuvanshAgarwal.Modules.Kitchen_Objects.Plate.Scripts;
 using _RaghuvanshAgarwal.Modules.Kitchen_Objects.Scripts;
 using _RaghuvanshAgarwal.Modules.Progress_Bar;
 using _RaghuvanshAgarwal.Modules.Recipes.Cutting;
@@ -17,7 +18,17 @@ namespace _RaghuvanshAgarwal.Modules.Counters.Cutting.Scripts {
         private int _cuttingProgress;
         public override void Interact(Player.Scripts.Player player) {
             if (HasKitchenObject()) {
-                if (!player.HasKitchenObject()) {
+                if (player.HasKitchenObject()) {
+                    // Player has kitchen Object
+                    if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject playerPlate)) {
+                        if (playerPlate.TryAddIngredient(GetKitchenObject().ObjectData)) {
+                            GetKitchenObject().DestroySelf();
+                            _cuttingProgress = 0;
+                            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs(0));
+                        }
+                    }
+                }
+                else {
                     GetKitchenObject().SetParent(player);
                     _cuttingProgress = 0;
                     OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs(0));

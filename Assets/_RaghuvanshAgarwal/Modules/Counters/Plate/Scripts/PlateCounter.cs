@@ -19,9 +19,10 @@ namespace _RaghuvanshAgarwal.Modules.Counters.Plate.Scripts {
             _currenTime += Time.deltaTime;
             if (_currenTime >= plateSpawnRate) {
                 _currenTime = 0f;
-                _spawnedCount++;
-                _spawnedCount =  Mathf.Clamp(_spawnedCount, 0, maxSpawnedCount);
-                OnPlateSpawned?.Invoke(this, EventArgs.Empty);
+                if (_spawnedCount < maxSpawnedCount) {
+                    _spawnedCount++;
+                    OnPlateSpawned?.Invoke(this, EventArgs.Empty);
+                }
             }
         }
 
