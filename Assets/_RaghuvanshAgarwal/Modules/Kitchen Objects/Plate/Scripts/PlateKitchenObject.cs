@@ -17,6 +17,8 @@ namespace _RaghuvanshAgarwal.Modules.Kitchen_Objects.Plate.Scripts {
         public event EventHandler<IngredientAddedOnPlateEventArgs> OnIngredientAddedOnPlate;
         [SerializeField] private List<KitchenObjectSO> validIngredients = new List<KitchenObjectSO>();
         private List<KitchenObjectSO> _ingredients = new List<KitchenObjectSO>();
+        
+        public List<KitchenObjectSO> Ingredients => _ingredients;
 
         private void Awake() {
             _ingredients =  new List<KitchenObjectSO>();

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65e9152fd04ed4cee91efb9008bd702c, type: 3}
+  m_Name: Cheese Burger
+  m_EditorClassIdentifier: Assembly-CSharp::_RaghuvanshAgarwal.Modules.Recipes.Recipe.RecipeSO
+  recipeName: Cheese Burger
+  ingredients:
+  - {fileID: 11400000, guid: 297799cac29614fc1a8797a3ba0f1ecb, type: 2}
+  - {fileID: 11400000, guid: 3f8ea004d942f47e6ac6b37982e6fdbb, type: 2}
+  - {fileID: 11400000, guid: 1b83f78bf6ee143428d97d4ed617a11a, type: 2}
