@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _RaghuvanshAgarwal.Modules.GameManager;
 using _RaghuvanshAgarwal.Modules.Kitchen_Objects.Plate.Scripts;
 using _RaghuvanshAgarwal.Modules.Recipes.Recipe;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace _RaghuvanshAgarwal.Modules.Delivery {
         private const int WaitingRecipeMax = 4;
 
         public List<RecipeSO> WaitingRecipeList => _waitingRecipeList;
+        public int CorrectOrderCount { get; private set; }
 
         private void Awake() {
             if (Instance != null) {
@@ -29,9 +31,11 @@ namespace _RaghuvanshAgarwal.Modules.Delivery {
             }
             Instance = this;
             _waitingRecipeList = new List<RecipeSO>();
+            CorrectOrderCount = 0;
         }
 
         private void Update() {
+            if(!KitchenChaoGameManager.Instance.IsGamePlaying()) return;
             _waitingTime -=  Time.deltaTime;
             if (_waitingTime <= 0f) {
                 _waitingTime = WaitingTimeMax;
@@ -49,6 +53,7 @@ namespace _RaghuvanshAgarwal.Modules.Delivery {
                 if (recipe.IsThisRecipe(plateKitchenObject.Ingredients)) {
                     Debug.Log("Delivering recipe is correct " + recipe.name);
                     _waitingRecipeList.RemoveAt(i);
+                    CorrectOrderCount++;
                     OnRecipeDelivered?.Invoke(this, EventArgs.Empty);
                     OnCorrectRecipeDelivered?.Invoke(this, EventArgs.Empty);
                     return;

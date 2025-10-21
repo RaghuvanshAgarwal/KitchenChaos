@@ -16,9 +16,13 @@ namespace _RaghuvanshAgarwal.Modules.GameManager {
         private State _state;
         private float _waitingToStartTime = 1f;
         private float _countdownToStart = 3f;
-        private float _gamePlayingTimer = 10f;
+        private float _gamePlayingTimer;
+        private const float GamePlayingTimerMax = 10f;
 
         public float CountdownToStart => _countdownToStart;
+
+        public float GamePlayingTimer => _gamePlayingTimer;
+        public float GamePlayingTimerNormalized => 1 - (_gamePlayingTimer / GamePlayingTimerMax);
 
         private void Awake() {
             Instance = this;
@@ -39,6 +43,7 @@ namespace _RaghuvanshAgarwal.Modules.GameManager {
                     _countdownToStart -= Time.deltaTime;
                     if (_countdownToStart <= 0) {
                         _state = State.Playing;
+                        _gamePlayingTimer = GamePlayingTimerMax;
                         OnStateChanged?.Invoke(this, EventArgs.Empty);
                     }
                     break;
@@ -54,7 +59,6 @@ namespace _RaghuvanshAgarwal.Modules.GameManager {
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            Debug.Log(_state);
         }
 
         public bool IsGamePlaying() {
@@ -63,6 +67,10 @@ namespace _RaghuvanshAgarwal.Modules.GameManager {
         
         public bool IsCountdownToStart() {
             return _state == State.CountdownToStart;
+        }
+
+        public bool IsGameOver() {
+            return _state == State.GameOver;
         }
     }
 }
