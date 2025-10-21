@@ -1,5 +1,6 @@
 using System;
 using _RaghuvanshAgarwal.Modules.Counters.Scripts;
+using _RaghuvanshAgarwal.Modules.GameManager;
 using _RaghuvanshAgarwal.Modules.Kitchen_Objects.Scripts;
 using UnityEngine;
 
@@ -60,12 +61,14 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
         
         
         private void GameInputOnInteractAction(object sender, EventArgs e) {
+            if(!KitchenChaoGameManager.Instance.IsGamePlaying()) return;
             if (_selectedCounter != null) {
                 _selectedCounter.Interact(this);
             }
         }
         
         private void GameInputOnInteractAlternateAction(object sender, EventArgs e) {
+            if(!KitchenChaoGameManager.Instance.IsGamePlaying()) return;
             if (_selectedCounter != null) {
                 _selectedCounter.InteractAlternate(this);
             }
