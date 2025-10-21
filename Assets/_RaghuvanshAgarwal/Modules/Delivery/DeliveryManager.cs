@@ -10,6 +10,8 @@ namespace _RaghuvanshAgarwal.Modules.Delivery {
     public class DeliveryManager : MonoBehaviour {
         public event EventHandler OnRecipeAdded;
         public event EventHandler OnRecipeDelivered;
+        public event EventHandler OnCorrectRecipeDelivered;
+        public event EventHandler OnWrongRecipeDelivered;
         public static DeliveryManager Instance { get; private set; }
         [SerializeField] RecipeListSO recipeListSO;
         private List<RecipeSO> _waitingRecipeList;
@@ -48,10 +50,12 @@ namespace _RaghuvanshAgarwal.Modules.Delivery {
                     Debug.Log("Delivering recipe is correct " + recipe.name);
                     _waitingRecipeList.RemoveAt(i);
                     OnRecipeDelivered?.Invoke(this, EventArgs.Empty);
+                    OnCorrectRecipeDelivered?.Invoke(this, EventArgs.Empty);
                     return;
                 }
             }
             Debug.Log("Delivering recipe is incorrect");
+            OnWrongRecipeDelivered?.Invoke(this, EventArgs.Empty);
         }
         
         

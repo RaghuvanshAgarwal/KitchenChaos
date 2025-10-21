@@ -14,6 +14,8 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
     }
     
     public class Player : MonoBehaviour, IKitchenObjectParent {
+
+        public event EventHandler OnPickedSomething;
         [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private GameInput gameInput;
         [SerializeField] private LayerMask counterLayerMask;
@@ -134,9 +136,17 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
         }
 
         public Transform GetKitchenObjectFollowTransform() => kitchenObjectFollowTransform;
-        public void SetKitchenObject(KitchenObject kitchenObject) => _kitchenObject = kitchenObject;
+
+        public void SetKitchenObject(KitchenObject kitchenObject) {
+            _kitchenObject = kitchenObject;
+            if (_kitchenObject != null) {
+                OnPickedSomething?.Invoke(this, EventArgs.Empty);
+            }
+        }
         public KitchenObject GetKitchenObject() => _kitchenObject;
-        public void ClearKitchenObject() => _kitchenObject = null;
+        public void ClearKitchenObject() {
+            _kitchenObject = null;
+        }
         public bool HasKitchenObject() => _kitchenObject != null;
     }
 }

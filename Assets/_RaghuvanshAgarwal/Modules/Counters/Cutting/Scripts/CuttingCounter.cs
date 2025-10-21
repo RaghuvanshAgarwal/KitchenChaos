@@ -11,6 +11,7 @@ using UnityEngine.Events;
 namespace _RaghuvanshAgarwal.Modules.Counters.Cutting.Scripts {
     public class CuttingCounter : BaseCounter, IHasProgress
     {
+        public static event EventHandler OnAnyCuttingActionPerformed;
         public event EventHandler OnCuttingActionPerformed;
         public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
         
@@ -49,6 +50,7 @@ namespace _RaghuvanshAgarwal.Modules.Counters.Cutting.Scripts {
             CuttingRecipeSO recipeSO = GetRecipeWithInput(GetKitchenObject().ObjectData);
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs((float)_cuttingProgress / recipeSO.CuttingProgressMax));
             OnCuttingActionPerformed?.Invoke(this, EventArgs.Empty);
+            OnAnyCuttingActionPerformed?.Invoke(this, EventArgs.Empty);
             if (_cuttingProgress >= recipeSO.CuttingProgressMax) {
                 GetKitchenObject().DestroySelf();
                 KitchenObject.Spawn(this, recipeSO.Output);
