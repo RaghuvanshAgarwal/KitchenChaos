@@ -1,5 +1,6 @@
 using System;
 using _RaghuvanshAgarwal.Modules.GameManager;
+using _RaghuvanshAgarwal.Modules.UI.Game_Options;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,9 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Pause {
     {
         [SerializeField] private Button resumeButton;
         [SerializeField] private Button mainMenuButton;
+        [SerializeField] private Button optionsButton;
         [SerializeField] private CanvasGroup canvasGroup;
+        [SerializeField] private GameOptionsUI  gameOptionsUI;
 
         private void Start() {
             KitchenChaoGameManager.Instance.OnStateChanged += OnStateChanged;
@@ -17,8 +20,16 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Pause {
             
             resumeButton.onClick.AddListener(KitchenChaoGameManager.Instance.ToggleGamePause);
             mainMenuButton.onClick.AddListener(KitchenChaoGameManager.Instance.GoToMainMenu);
+            optionsButton.onClick.AddListener(() => {
+                Hide();
+                gameOptionsUI.Show();
+            });
             
             Hide();
+        }
+
+        private void OnDestroy() {
+            KitchenChaoGameManager.Instance.OnStateChanged -= OnStateChanged;
         }
 
         private void GameManager_OnGameResumed(object sender, EventArgs e) {
@@ -36,7 +47,7 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Pause {
             }
         }
 
-        private void Show() {
+        public void Show() {
             canvasGroup.alpha = 1;
             canvasGroup.blocksRaycasts = true;
             canvasGroup.interactable = true;
