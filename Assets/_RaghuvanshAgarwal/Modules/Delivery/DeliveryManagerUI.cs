@@ -19,17 +19,35 @@ namespace _RaghuvanshAgarwal.Modules.Delivery {
             Hide();
         }
 
-        private void GameManager_OnStateChanged(object sender, EventArgs e) {
-            if (KitchenChaoGameManager.Instance.IsGamePlaying()) {
-                Show();
-            }else {
-                Hide();
-            }
-        }
+        
 
         private void OnDestroy() {
             DeliveryManager.Instance.OnRecipeAdded -= UpdateUI;
             DeliveryManager.Instance.OnRecipeDelivered -= UpdateUI;
+            KitchenChaoGameManager.Instance.OnStateChanged -= GameManager_OnStateChanged;
+            
+        }
+
+        
+
+        private void GameManager_OnStateChanged(object sender, EventArgs e) {
+            if (KitchenChaoGameManager.Instance.IsGamePlaying()) {
+                KitchenChaoGameManager.Instance.OnGamePaused += GameManager_OnGamePaused;
+                KitchenChaoGameManager.Instance.OnGameResumed += GameManager_OnGameResumed;
+                Show();
+            }else {
+                KitchenChaoGameManager.Instance.OnGamePaused -= GameManager_OnGamePaused;
+                KitchenChaoGameManager.Instance.OnGameResumed -= GameManager_OnGameResumed;
+                Hide();
+            }
+        }
+        
+        private void GameManager_OnGamePaused(object sender, EventArgs e) {
+            Hide();
+        }
+
+        private void GameManager_OnGameResumed(object sender, EventArgs e) {
+            Show();
         }
 
 
@@ -50,11 +68,20 @@ namespace _RaghuvanshAgarwal.Modules.Delivery {
                 if(container.transform.GetChild(i) == recipeUiTemplate.transform) continue;
                 Destroy(container.transform.GetChild(i).gameObject);
             }
-
+            
+            Dictionary<RecipeSO, int> recipes = new Dictionary<RecipeSO, int>();
+            
             foreach (RecipeSO recipeSO in DeliveryManager.Instance.WaitingRecipeList) {
+                if (!recipes.TryAdd(recipeSO, 1)) {
+                    recipes[recipeSO]++;
+                }
+            }
+
+            foreach (KeyValuePair<RecipeSO, int> keyValuePair in recipes) {
                 DeliveryRecipeUI ui = Instantiate(recipeUiTemplate, container.transform);
                 ui.gameObject.SetActive(true);
-                ui.Initialize(recipeSO);
+                ui.Initialize(keyValuePair.Key);
+                ui.SetCount(keyValuePair.Value);
             }
         }
 

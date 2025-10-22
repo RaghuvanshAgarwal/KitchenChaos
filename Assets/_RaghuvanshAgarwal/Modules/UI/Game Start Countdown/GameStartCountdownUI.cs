@@ -19,13 +19,25 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Start_Countdown {
 
         private void GameManager_OnStateChanged(object sender, EventArgs e) {
             if (KitchenChaoGameManager.Instance.IsCountdownToStart()) {
+                KitchenChaoGameManager.Instance.OnGamePaused += GameManager_OnGamePaused;
+                KitchenChaoGameManager.Instance.OnGameResumed += GameManager_OnGameResumed;
                 Show();
             }
             else {
+                KitchenChaoGameManager.Instance.OnGamePaused -= GameManager_OnGamePaused;
+                KitchenChaoGameManager.Instance.OnGameResumed -= GameManager_OnGameResumed;
                 Hide();
             }
         }
+        
+        private void GameManager_OnGameResumed(object sender, EventArgs e) {
+            Show();
+        }
 
+        private void GameManager_OnGamePaused(object sender, EventArgs e) {
+            Hide();
+        }
+        
         private void Update() {
             countdownText.text = Mathf.CeilToInt(KitchenChaoGameManager.Instance.CountdownToStart).ToString();
         }

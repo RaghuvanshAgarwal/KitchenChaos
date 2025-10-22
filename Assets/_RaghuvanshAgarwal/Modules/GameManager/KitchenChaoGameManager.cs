@@ -1,4 +1,5 @@
 using System;
+using _RaghuvanshAgarwal.Modules.Player.Scripts;
 using UnityEngine;
 
 namespace _RaghuvanshAgarwal.Modules.GameManager {
@@ -6,6 +7,8 @@ namespace _RaghuvanshAgarwal.Modules.GameManager {
         
         public static KitchenChaoGameManager Instance {get; private set;}
         public event EventHandler OnStateChanged;
+        public event EventHandler OnGamePaused;
+        public event EventHandler OnGameResumed;
         private enum State {
             WaitingToStart,
             CountdownToStart,
@@ -17,7 +20,8 @@ namespace _RaghuvanshAgarwal.Modules.GameManager {
         private float _waitingToStartTime = 1f;
         private float _countdownToStart = 3f;
         private float _gamePlayingTimer;
-        private const float GamePlayingTimerMax = 10f;
+        private const float GamePlayingTimerMax = 100f;
+        private bool _isGamePaused;
 
         public float CountdownToStart => _countdownToStart;
 
@@ -27,8 +31,13 @@ namespace _RaghuvanshAgarwal.Modules.GameManager {
         private void Awake() {
             Instance = this;
             _state = State.WaitingToStart;
-            
         }
+
+        private void Start() {
+            GameInput.Instance.OnPauseAction += ToggleGamePause;
+        }
+
+        
 
         private void Update() {
             switch (_state) {
@@ -71,6 +80,27 @@ namespace _RaghuvanshAgarwal.Modules.GameManager {
 
         public bool IsGameOver() {
             return _state == State.GameOver;
+        }
+        
+        
+        private void ToggleGamePause(object sender, EventArgs e) {
+            ToggleGamePause();
+        }
+
+        public void ToggleGamePause() {
+            _isGamePaused = !_isGamePaused;
+            Time.timeScale = _isGamePaused ? 0f : 1f;
+            if (_isGamePaused) {
+                OnGamePaused?.Invoke(this, EventArgs.Empty);
+            }
+            else {
+                OnGameResumed?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        public void GoToMainMenu() {
+            Time.timeScale = 1f;
+            Loader.Loader.LoadScene(Loader.Loader.Scene.MainMenuScene);
         }
     }
 }

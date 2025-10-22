@@ -16,16 +16,28 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Playing {
 
         private void GameManager_OnStateChanged(object sender, EventArgs e) {
             if (KitchenChaoGameManager.Instance.IsGamePlaying()) {
+                KitchenChaoGameManager.Instance.OnGamePaused += GameManager_OnGamePaused;
+                KitchenChaoGameManager.Instance.OnGameResumed += GameManager_OnGameResumed;
                 Show();
             }
             else {
+                KitchenChaoGameManager.Instance.OnGamePaused -= GameManager_OnGamePaused;
+                KitchenChaoGameManager.Instance.OnGameResumed -= GameManager_OnGameResumed;
                 Hide();
             }
         }
-
+        
         private void Update() {
             gamePlayingValue.text = TimeSpan.FromSeconds(KitchenChaoGameManager.Instance.GamePlayingTimer).ToString(@"hh\:mm\:ss");
             gamePlayingValue.color = colorGradient.Evaluate(KitchenChaoGameManager.Instance.GamePlayingTimerNormalized);
+        }
+        
+        private void GameManager_OnGameResumed(object sender, EventArgs e) {
+            Show();
+        }
+
+        private void GameManager_OnGamePaused(object sender, EventArgs e) {
+            Hide();
         }
 
         private void Show() {

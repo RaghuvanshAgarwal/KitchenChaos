@@ -19,7 +19,7 @@ namespace _RaghuvanshAgarwal.Modules.Delivery {
         
         private float _waitingTime = 0f;
         private const float WaitingTimeMax = 4f;
-        private const int WaitingRecipeMax = 4;
+        private const int WaitingRecipeMax = 10;
 
         public List<RecipeSO> WaitingRecipeList => _waitingRecipeList;
         public int CorrectOrderCount { get; private set; }
@@ -51,7 +51,6 @@ namespace _RaghuvanshAgarwal.Modules.Delivery {
             for (int i = 0; i < _waitingRecipeList.Count; ++i) {
                 RecipeSO recipe = _waitingRecipeList[i];
                 if (recipe.IsThisRecipe(plateKitchenObject.Ingredients)) {
-                    Debug.Log("Delivering recipe is correct " + recipe.name);
                     _waitingRecipeList.RemoveAt(i);
                     CorrectOrderCount++;
                     OnRecipeDelivered?.Invoke(this, EventArgs.Empty);
@@ -59,7 +58,6 @@ namespace _RaghuvanshAgarwal.Modules.Delivery {
                     return;
                 }
             }
-            Debug.Log("Delivering recipe is incorrect");
             OnWrongRecipeDelivered?.Invoke(this, EventArgs.Empty);
         }
         

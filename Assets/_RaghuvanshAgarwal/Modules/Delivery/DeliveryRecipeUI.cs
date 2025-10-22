@@ -8,6 +8,7 @@ namespace _RaghuvanshAgarwal.Modules.Delivery {
     public class DeliveryRecipeUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI recipeName;
+        [SerializeField] private TextMeshProUGUI countLabel;
         [SerializeField] private PlateIconController iconTemplate;
         [SerializeField] private Transform iconContainer;
         
@@ -19,6 +20,10 @@ namespace _RaghuvanshAgarwal.Modules.Delivery {
                 iconController.gameObject.SetActive(true);
                 iconController.SetKitchenObjectSO(recipeIngredient);
             }
+        }
+
+        public void SetCount(int count) {
+            countLabel.text = count.ToString();
         }
     }
 }
