@@ -3,16 +3,27 @@ using _RaghuvanshAgarwal.Modules.Delivery;
 using _RaghuvanshAgarwal.Modules.GameManager;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _RaghuvanshAgarwal.Modules.UI.Game_Over {
     public class GameOverUI : MonoBehaviour {
         [SerializeField] private TextMeshProUGUI orderDeliveredValue;
         [SerializeField] private CanvasGroup canvasGroup;
 
+        [SerializeField] private Button playAgainButton;
+        [SerializeField] private Button mainMenuButton;
 
         private void Start() {
             Hide();
             KitchenChaoGameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
+            
+            playAgainButton.onClick.AddListener(() => {
+                Loader.Loader.LoadScene(Loader.Loader.Scene.GameScene);
+            });
+            
+            mainMenuButton.onClick.AddListener(() => {
+                Loader.Loader.LoadScene(Loader.Loader.Scene.MainMenuScene);
+            });
         }
 
         private void GameManager_OnStateChanged(object sender, EventArgs e) {

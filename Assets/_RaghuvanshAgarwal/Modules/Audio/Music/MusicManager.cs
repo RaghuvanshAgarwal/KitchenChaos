@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace _RaghuvanshAgarwal.Modules.Audio.Music {
     public class MusicManager : MonoBehaviour {
-        private const string PLAYER_PREF_MUSIC_VOLUME_KEY = "PLAYER_MUSIC_VOLUME_KEY";
+        private const string PlayerPrefMusicVolumeKey = "PLAYER_MUSIC_VOLUME_KEY";
         public static MusicManager Instance {get; private set;}
         [SerializeField] private AudioSource audioSource;
         public float MusicVolume { get; private set; } = 0.3f;
 
         private void Awake() {
             Instance = this;
-            MusicVolume = PlayerPrefs.GetFloat(PLAYER_PREF_MUSIC_VOLUME_KEY, 0.3f);
+            MusicVolume = PlayerPrefs.GetFloat(PlayerPrefMusicVolumeKey, 0.3f);
             audioSource.volume = MusicVolume;
         }
 
@@ -20,7 +20,7 @@ namespace _RaghuvanshAgarwal.Modules.Audio.Music {
                 MusicVolume = 0f;
             }
             audioSource.volume = MusicVolume;
-            PlayerPrefs.SetFloat(PLAYER_PREF_MUSIC_VOLUME_KEY, MusicVolume);
+            PlayerPrefs.SetFloat(PlayerPrefMusicVolumeKey, MusicVolume);
         }
     }
 }

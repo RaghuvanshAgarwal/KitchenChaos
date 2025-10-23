@@ -20,7 +20,7 @@ namespace _RaghuvanshAgarwal.Modules.GameManager {
         private float _waitingToStartTime = 1f;
         private float _countdownToStart = 3f;
         private float _gamePlayingTimer;
-        private const float GamePlayingTimerMax = 100f;
+        private const float GamePlayingTimerMax = 10f;
         private bool _isGamePaused;
 
         public float CountdownToStart => _countdownToStart;

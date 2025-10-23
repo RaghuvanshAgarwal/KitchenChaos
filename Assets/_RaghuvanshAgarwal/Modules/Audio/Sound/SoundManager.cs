@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 namespace _RaghuvanshAgarwal.Modules.Audio.Sound {
     public class SoundManager : MonoBehaviour
     {
-        private const string PLAYER_PREF_SOUND_VOLUME_KEY = "PLAYER_PREF_SOUND_VOLUME_KEY";
+        private const string PlayerPrefSoundVolumeKey = "PLAYER_PREF_SOUND_VOLUME_KEY";
         public static SoundManager Instance {get; private set;}
         
         [SerializeField] SoundRefSO soundRef;
@@ -22,7 +22,7 @@ namespace _RaghuvanshAgarwal.Modules.Audio.Sound {
         }
 
         private void Start() {
-            SoundVolume =  PlayerPrefs.GetFloat(PLAYER_PREF_SOUND_VOLUME_KEY, 1f);
+            SoundVolume =  PlayerPrefs.GetFloat(PlayerPrefSoundVolumeKey, 1f);
             DeliveryManager.Instance.OnCorrectRecipeDelivered += DeliveryManager_OnCorrectRecipeDelivered;
             DeliveryManager.Instance.OnWrongRecipeDelivered += DeliveryManager_OnWrongRecipeDelivered;
             
@@ -98,7 +98,7 @@ namespace _RaghuvanshAgarwal.Modules.Audio.Sound {
             if (SoundVolume > 1f) {
                 SoundVolume = 0f;
             }
-            PlayerPrefs.SetFloat(PLAYER_PREF_SOUND_VOLUME_KEY, SoundVolume);
+            PlayerPrefs.SetFloat(PlayerPrefSoundVolumeKey, SoundVolume);
         }
     }
 }
