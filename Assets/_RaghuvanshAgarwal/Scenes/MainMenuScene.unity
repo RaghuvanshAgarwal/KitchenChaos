@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 2091205112}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &93467630
@@ -1369,7 +1369,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4917959421589883410, guid: a027dc4feb591497b94118ec8db7e64e, type: 3}
   m_PrefabInstance: {fileID: 1926865498}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2091205112}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -1570,6 +1570,11 @@ MonoBehaviour:
   AmplitudeGain: 2.22
   FrequencyGain: 0.5
   m_NoiseOffsets: {x: 183.38785, y: -944.96826, z: -290.98666}
+--- !u!1 &2091205112 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7693638753539941536, guid: a027dc4feb591497b94118ec8db7e64e, type: 3}
+  m_PrefabInstance: {fileID: 1926865498}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

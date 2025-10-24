@@ -16,7 +16,6 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Options {
         struct ButtonTextData {
             public Button button;
             public TextMeshProUGUI text;
-            public GameObject rebindText;
         }
         [SerializeField] private Button soundButton;
         [SerializeField] private Button musicButton;
@@ -25,6 +24,7 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Options {
         [SerializeField] private TextMeshProUGUI soundText;
         [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private GamePauseUI  gamePauseUI;
+        [SerializeField] private GameObject rebindText;
 
         [Header("Key Bindings")] 
         [SerializeField] private ButtonTextData moveUp;
@@ -34,6 +34,9 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Options {
         [SerializeField] private ButtonTextData interact;
         [SerializeField] private ButtonTextData interactAtl;
         [SerializeField] private ButtonTextData togglePause;
+        [SerializeField] private ButtonTextData gamepadInteract;
+        [SerializeField] private ButtonTextData gamepadInteractAtl;
+        [SerializeField] private ButtonTextData gamepadTogglePause;
         
 
         private void Awake() {
@@ -54,38 +57,53 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Options {
             });
             
             moveUp.button.onClick.AddListener(() => {
-                ShowRebindText(ref moveUp);
+                ShowRebindText();
                 RebindBinding(GameInput.Binding.MoveUp);
             });
             
             moveDown.button.onClick.AddListener(() => {
-                ShowRebindText(ref moveDown);
+                ShowRebindText();
                 RebindBinding(GameInput.Binding.MoveDown);
             });
             
             moveLeft.button.onClick.AddListener(() => {
-                ShowRebindText(ref moveLeft);
+                ShowRebindText();
                 RebindBinding(GameInput.Binding.MoveLeft);
             });
             
             moveRight.button.onClick.AddListener(() => {
-                ShowRebindText(ref moveRight);
+                ShowRebindText();
                 RebindBinding(GameInput.Binding.MoveRight);
             });
             
             interact.button.onClick.AddListener(() => {
-                ShowRebindText(ref interact);
+                ShowRebindText();
                 RebindBinding(GameInput.Binding.Interact);
             });
             
             interactAtl.button.onClick.AddListener(() => {
-                ShowRebindText(ref interactAtl);
+                ShowRebindText();
                 RebindBinding(GameInput.Binding.InteractAlternate);
             });
             
             togglePause.button.onClick.AddListener(() => {
-                ShowRebindText(ref togglePause);
+                ShowRebindText();
                 RebindBinding(GameInput.Binding.Pause);
+            });
+            
+            gamepadInteract.button.onClick.AddListener(() => {
+                ShowRebindText();
+                RebindBinding(GameInput.Binding.GamepadInteract);
+            });
+            
+            gamepadInteractAtl.button.onClick.AddListener(() => {
+                ShowRebindText();
+                RebindBinding(GameInput.Binding.GamepadInteractAlternate);
+            });
+            
+            gamepadTogglePause.button.onClick.AddListener(() => {
+                ShowRebindText();
+                RebindBinding(GameInput.Binding.GamepadPause);
             });
         }
 
@@ -105,10 +123,14 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Options {
             interact.text.text = GameInput.Instance.GetBindingString(GameInput.Binding.Interact);
             interactAtl.text.text = GameInput.Instance.GetBindingString(GameInput.Binding.InteractAlternate);
             togglePause.text.text = GameInput.Instance.GetBindingString(GameInput.Binding.Pause);
+            gamepadInteract.text.text = GameInput.Instance.GetBindingString(GameInput.Binding.GamepadInteract);
+            gamepadInteractAtl.text.text = GameInput.Instance.GetBindingString(GameInput.Binding.GamepadInteractAlternate);
+            gamepadTogglePause.text.text = GameInput.Instance.GetBindingString(GameInput.Binding.GamepadPause);
             moveUp.text.text = GameInput.Instance.GetBindingString(GameInput.Binding.MoveUp);
             moveDown.text.text = GameInput.Instance.GetBindingString(GameInput.Binding.MoveDown);
             moveLeft.text.text = GameInput.Instance.GetBindingString(GameInput.Binding.MoveLeft);
             moveRight.text.text = GameInput.Instance.GetBindingString(GameInput.Binding.MoveRight);
+            
         }
 
         private void Start() {
@@ -137,6 +159,7 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Options {
             canvasGroup.alpha = 1;
             canvasGroup.blocksRaycasts = true;
             canvasGroup.interactable = true;
+            soundButton.Select();
             UpdateSoundText();
             UpdateMusicText();
             UpdateBindingText();
@@ -161,18 +184,12 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Options {
             HideRebindText();
         }
 
-        private void ShowRebindText(ref ButtonTextData buttonTextData) {
-            buttonTextData.rebindText.SetActive(true);
+        private void ShowRebindText() {
+            rebindText.SetActive(true);
         }
 
         private void HideRebindText() {
-            moveUp.rebindText.SetActive(false);
-            moveDown.rebindText.SetActive(false);
-            moveLeft.rebindText.SetActive(false);
-            moveRight.rebindText.SetActive(false);
-            interact.rebindText.SetActive(false);
-            interactAtl.rebindText.SetActive(false);
-            togglePause.rebindText.SetActive(false);
+            rebindText.SetActive(false);
         }
     }
 }

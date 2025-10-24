@@ -244,32 +244,10 @@ namespace _RaghuvanshAgarwal.Modules.Player.Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""faf023c9-5217-40d1-a98f-16d5009a5bce"",
-                    ""path"": ""<DualShockGamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""0a9315f7-44c2-4cda-9ac1-bbee84e958ec"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f936fe68-fa06-4caa-8e2e-4324d7fe9a8f"",
-                    ""path"": ""<DualSenseGamepadHID>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone(min=0.5)"",
                     ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
@@ -288,7 +266,7 @@ namespace _RaghuvanshAgarwal.Modules.Player.Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a8a776dd-46d1-4c4a-9fe0-28c65d3bd7e3"",
+                    ""id"": ""8ae38e33-98eb-4acd-a879-3c84ead486da"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -310,8 +288,8 @@ namespace _RaghuvanshAgarwal.Modules.Player.Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""56bb09ab-0d26-42b0-bdfd-026478c78c3a"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""id"": ""814bf74f-3504-492d-b826-4c8b51869aab"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -332,7 +310,7 @@ namespace _RaghuvanshAgarwal.Modules.Player.Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""28a247ec-9005-44db-a672-2fca602125fb"",
+                    ""id"": ""13228ccd-6d8c-4064-b512-8e9a95833346"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",

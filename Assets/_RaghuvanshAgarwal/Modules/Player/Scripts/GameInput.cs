@@ -14,7 +14,10 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
 			MoveRight,
 			Interact,
 			InteractAlternate,
-			Pause
+			Pause,
+			GamepadInteract,
+			GamepadInteractAlternate,
+			GamepadPause
 		}
 		public static GameInput Instance {get; private set;}
 		public event EventHandler OnInteractAction;
@@ -79,6 +82,12 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
 					return _playerInput.Player.InteractAlternate.GetBindingDisplayString(0);
 				case Binding.Pause:
 					return _playerInput.Player.Pause.GetBindingDisplayString(0);
+				case Binding.GamepadInteract:
+					return _playerInput.Player.Interact.GetBindingDisplayString(1);
+				case Binding.GamepadInteractAlternate:
+					return _playerInput.Player.InteractAlternate.GetBindingDisplayString(1);
+				case Binding.GamepadPause:
+					return _playerInput.Player.Pause.GetBindingDisplayString(1);
 				default:
 					throw new ArgumentOutOfRangeException(nameof(binding), binding, null);
 			}
@@ -116,6 +125,18 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
 				case Binding.Pause:
 					inputAction = _playerInput.Player.Pause;
 					index = 0;
+					break;
+				case Binding.GamepadInteract:
+					inputAction = _playerInput.Player.Interact;
+					index = 1;
+					break;
+				case Binding.GamepadInteractAlternate:
+					inputAction = _playerInput.Player.InteractAlternate;
+					index = 1;
+					break;
+				case Binding.GamepadPause:
+					inputAction = _playerInput.Player.Pause;
+					index = 1;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(binding), binding, null);

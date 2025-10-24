@@ -110,13 +110,13 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
             bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, movDir, maxDistance);
             if (!canMove) {
                 Vector3 xAttempt = new Vector3(movDir.x, 0, 0).normalized;
-                canMove = movDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, xAttempt, maxDistance);
+                canMove = Mathf.Abs(movDir.x) > 0.5f && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, xAttempt, maxDistance);
                 if (canMove) {
                     movDir = xAttempt;
                 }
                 else {
                     Vector3 zAttempt = new Vector3(0, 0, movDir.z).normalized;
-                    canMove = movDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, zAttempt, maxDistance);
+                    canMove = Mathf.Abs(movDir.z) > 0.5f && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, zAttempt, maxDistance);
                     if (canMove) {
                         movDir = zAttempt;
                     }

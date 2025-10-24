@@ -51,6 +51,7 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Pause {
             canvasGroup.alpha = 1;
             canvasGroup.blocksRaycasts = true;
             canvasGroup.interactable = true;
+            resumeButton.Select();
         }
 
         private void Hide() {

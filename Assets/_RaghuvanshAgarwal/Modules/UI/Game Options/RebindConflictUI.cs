@@ -27,7 +27,6 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Options {
         private void GameOptionsUI_OnRebindConflict(object sender, EventArgs e) {
             Show();
             _timer = 0;
-            Debug.Log("show");
         }
 
         private void Show() {
