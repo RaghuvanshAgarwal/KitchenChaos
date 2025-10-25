@@ -1,5 +1,6 @@
 using System;
 using _RaghuvanshAgarwal.Modules.Counters.Scripts;
+using _RaghuvanshAgarwal.Modules.GameManager;
 using _RaghuvanshAgarwal.Modules.Kitchen_Objects.Scripts;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace _RaghuvanshAgarwal.Modules.Counters.Plate.Scripts {
         private float _currenTime = 0f;
 
         private void Update() {
+            if(!KitchenChaoGameManager.Instance.IsGamePlaying()) return;
             _currenTime += Time.deltaTime;
             if (_currenTime >= plateSpawnRate) {
                 _currenTime = 0f;

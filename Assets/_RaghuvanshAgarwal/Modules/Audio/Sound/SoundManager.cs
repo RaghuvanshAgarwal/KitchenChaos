@@ -92,6 +92,10 @@ namespace _RaghuvanshAgarwal.Modules.Audio.Sound {
         public void PlayFootstepSounds(Vector3 transformPosition, float volume) {
             PlaySound(soundRef.footsteps, transformPosition, volume);
         }
+        
+        public void PlayCountdownSounds() {
+            PlaySound(soundRef.warning, Vector3.zero);
+        }
 
         public void ChangeVolume() {
             SoundVolume += 0.1f;
@@ -99,6 +103,10 @@ namespace _RaghuvanshAgarwal.Modules.Audio.Sound {
                 SoundVolume = 0f;
             }
             PlayerPrefs.SetFloat(PlayerPrefSoundVolumeKey, SoundVolume);
+        }
+
+        public void PlayWarningSound(Vector3 transformPosition, float volume) {
+            PlaySound(soundRef.warning, transformPosition, volume);
         }
     }
 }

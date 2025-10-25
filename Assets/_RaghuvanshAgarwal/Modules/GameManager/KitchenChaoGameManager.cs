@@ -17,7 +17,6 @@ namespace _RaghuvanshAgarwal.Modules.GameManager {
         }
 
         private State _state;
-        private float _waitingToStartTime = 1f;
         private float _countdownToStart = 3f;
         private float _gamePlayingTimer;
         private const float GamePlayingTimerMax = 600f;
@@ -35,32 +34,30 @@ namespace _RaghuvanshAgarwal.Modules.GameManager {
 
         private void Start() {
             GameInput.Instance.OnPauseAction += ToggleGamePause;
+            GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
         }
 
-        
+        private void OnDestroy() {
+            GameInput.Instance.OnPauseAction -= ToggleGamePause;
+            GameInput.Instance.OnInteractAction -= GameInput_OnInteractAction;
+        }
+
 
         private void Update() {
             switch (_state) {
                 case State.WaitingToStart:
-                    _waitingToStartTime -= Time.deltaTime;
-                    if (_waitingToStartTime <= 0) {
-                        _state = State.CountdownToStart;
-                        OnStateChanged?.Invoke(this, EventArgs.Empty);
-                    }
                     break;
                 case State.CountdownToStart:
                     _countdownToStart -= Time.deltaTime;
                     if (_countdownToStart <= 0) {
-                        _state = State.Playing;
                         _gamePlayingTimer = GamePlayingTimerMax;
-                        OnStateChanged?.Invoke(this, EventArgs.Empty);
+                        SetState(State.Playing);
                     }
                     break;
                 case State.Playing:
                     _gamePlayingTimer -= Time.deltaTime;
                     if (_gamePlayingTimer <= 0) {
-                        _state = State.GameOver;
-                        OnStateChanged?.Invoke(this, EventArgs.Empty);
+                        SetState(State.GameOver);
                     }
                     break;
                 case State.GameOver:
@@ -82,9 +79,20 @@ namespace _RaghuvanshAgarwal.Modules.GameManager {
             return _state == State.GameOver;
         }
         
+        private void GameInput_OnInteractAction(object sender, EventArgs e) {
+            if (_state == State.WaitingToStart) {
+                GameInput.Instance.OnInteractAction -= GameInput_OnInteractAction;
+                SetState(State.CountdownToStart);
+            }
+        }
         
         private void ToggleGamePause(object sender, EventArgs e) {
             ToggleGamePause();
+        }
+
+        private void SetState(State state) {
+            _state = state;
+            OnStateChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public void ToggleGamePause() {

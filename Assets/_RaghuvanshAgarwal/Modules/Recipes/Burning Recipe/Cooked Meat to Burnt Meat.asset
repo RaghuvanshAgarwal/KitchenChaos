@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_RaghuvanshAgarwal.Modules.Recipes.Burning_Recipe.BurningRecipeSO
   <Input>k__BackingField: {fileID: 11400000, guid: 3f8ea004d942f47e6ac6b37982e6fdbb, type: 2}
   <Output>k__BackingField: {fileID: 11400000, guid: 9e26f693fc2dc4adabeeac4ca60edd64, type: 2}
-  <BurningTimerMax>k__BackingField: 5
+  <BurningTimerMax>k__BackingField: 6

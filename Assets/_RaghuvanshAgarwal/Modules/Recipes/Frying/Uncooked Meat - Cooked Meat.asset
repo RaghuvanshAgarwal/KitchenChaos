@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_RaghuvanshAgarwal.Modules.Recipes.Frying.FryingRecipeSO
   <Input>k__BackingField: {fileID: 11400000, guid: 8e47cca81a06049d9ad47f8271980033, type: 2}
   <Output>k__BackingField: {fileID: 11400000, guid: 3f8ea004d942f47e6ac6b37982e6fdbb, type: 2}
-  <FryingTimerMax>k__BackingField: 3
+  <FryingTimerMax>k__BackingField: 5

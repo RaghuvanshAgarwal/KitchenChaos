@@ -23,6 +23,7 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
 		public event EventHandler OnInteractAction;
 		public event EventHandler OnInteractAlternateAction;
 		public event EventHandler OnPauseAction;
+		public event EventHandler OnBindingRebinded;
 		
 		private PlayerInputActions _playerInput;
 		private void Awake() {
@@ -158,6 +159,7 @@ namespace _RaghuvanshAgarwal.Modules.Player.Scripts {
 					}
 					_playerInput.Player.Enable();
 					onComplete();
+					OnBindingRebinded?.Invoke(this, EventArgs.Empty);
 					PlayerPrefs.SetString(PlayerPrefInputBinding, _playerInput.SaveBindingOverridesAsJson());
 					PlayerPrefs.Save();
 				})

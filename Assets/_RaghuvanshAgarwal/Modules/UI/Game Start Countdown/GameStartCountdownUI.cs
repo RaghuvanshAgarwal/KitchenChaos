@@ -1,4 +1,5 @@
 using System;
+using _RaghuvanshAgarwal.Modules.Audio.Sound;
 using _RaghuvanshAgarwal.Modules.GameManager;
 using TMPro;
 using UnityEngine;
@@ -6,7 +7,15 @@ using UnityEngine;
 namespace _RaghuvanshAgarwal.Modules.UI.Game_Start_Countdown {
     public class GameStartCountdownUI : MonoBehaviour
     {
+        private static readonly int NumberPopup = Animator.StringToHash("NumberPopup");
         [SerializeField] TextMeshProUGUI countdownText;
+        
+        private Animator _animator;
+        private int _currentCountdown = 0;
+
+        private void Awake() {
+            _animator =  GetComponent<Animator>();
+        }
 
         private void Start() {
             KitchenChaoGameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
@@ -39,7 +48,13 @@ namespace _RaghuvanshAgarwal.Modules.UI.Game_Start_Countdown {
         }
         
         private void Update() {
-            countdownText.text = Mathf.CeilToInt(KitchenChaoGameManager.Instance.CountdownToStart).ToString();
+            int num = Mathf.CeilToInt(KitchenChaoGameManager.Instance.CountdownToStart);
+            if (num != _currentCountdown) {
+                _currentCountdown = num;
+                _animator.SetTrigger(NumberPopup);
+                SoundManager.Instance.PlayCountdownSounds();
+            }
+            countdownText.text = _currentCountdown.ToString();
         }
         
         private void Hide() {

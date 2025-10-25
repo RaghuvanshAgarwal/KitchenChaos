@@ -83,6 +83,10 @@ namespace _RaghuvanshAgarwal.Modules.Counters.Stove.Scripts {
             }
         }
 
+        public bool IsFried() {
+            return _state == State.Fried;
+        }
+
         public override void Interact(Player.Scripts.Player player) {
             if (HasKitchenObject()) {
                 if (player.HasKitchenObject()) {
